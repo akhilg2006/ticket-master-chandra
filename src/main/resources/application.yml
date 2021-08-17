@@ -1,0 +1,69 @@
+management:
+  endpoints:
+    web:
+      base-path: /admin
+
+
+
+spring:
+  application:
+    name: loyalty-segments-service
+  banner:
+    location: classpath:banner.txt
+    charset: UTF-8
+  jackson:
+    default-property-inclusion: non-null
+    serialization:
+      write-empty-json-arrays: false
+
+server:
+  port: 8080
+  connection-timeout: 620000
+  
+  tomcat:
+    accesslog:
+      enabled: true
+      directory: /var/log/java-app
+      prefix: access
+      rename-on-rotate: false
+      request-attributes-enabled: true
+      rotate: false
+      suffix: .log
+      pattern: "%A %h %l %u %t '%{X-HD-ClientId}i' '%{X-HD-RequestID}o' '%r' %s %b %D"
+  servlet:
+    context-path: /ticket-master
+
+logging:
+  level:
+    com.homedepot: 'INFO'
+    springfox.documentation: OFF
+  path: /var/log/java-app/
+  config: classpath:logback.xml
+
+
+httpclient:
+  connection:
+    max:
+      number: 200
+      perroute: 100
+    timeout:
+      millis: 5000
+    request:
+      timeout:
+        millis: 2000
+    read:
+      timeout:
+        millis: 10000
+    socket:
+      timeout:
+        millis: 10000
+    keepalive:
+      timeout:
+        millis: 600000
+    monitor:
+      delay:
+        millis: 1000
+  retry:
+    delay:
+      millis: 2000
+
